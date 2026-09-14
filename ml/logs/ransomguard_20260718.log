@@ -1,0 +1,314 @@
+2026-07-18 22:30:21 | INFO     | ml.main | run_training:63 | ============================================================
+2026-07-18 22:30:21 | INFO     | ml.main | run_training:64 | RansomGuard ML — Training Mode
+2026-07-18 22:30:21 | INFO     | ml.main | run_training:65 | ============================================================
+2026-07-18 22:30:21 | INFO     | ml.main | run_training:75 | Using default dataset: D:\Projects\ransomguard\ml\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:30:21 | INFO     | ml.training.pipeline | run:70 | ============================================================
+2026-07-18 22:30:21 | INFO     | ml.training.pipeline | run:71 | RansomGuard Training Pipeline Starting
+2026-07-18 22:30:21 | INFO     | ml.training.pipeline | run:72 | ============================================================
+2026-07-18 22:30:21 | INFO     | ml.training.pipeline | run:75 | [1/9] Loading dataset...
+2026-07-18 22:30:21 | WARNING  | ml.dataset.loader | load:117 | MLRan dataset not found at: D:\Projects\ransomguard\ml\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:30:21 | INFO     | ml.dataset.loader | load:130 | No explicit datasets found. Scanning dataset directory...
+2026-07-18 22:30:21 | WARNING  | ml.dataset.loader | load:134 | No datasets loaded. Generating synthetic dataset for testing.
+2026-07-18 22:30:21 | WARNING  | ml.dataset.loader | _generate_synthetic_dataset:334 | Generating synthetic dataset — NOT for production use.
+2026-07-18 22:30:21 | INFO     | ml.dataset.loader | _generate_synthetic_dataset:377 | Synthetic dataset created: (5000, 14)
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:78 | Dataset stats: 5000 samples
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:81 | [2/9] Splitting features and labels...
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:83 | Feature matrix: (5000, 13) | Labels: (5000,)
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:86 | [3/9] Applying feature engineering and normalization...
+2026-07-18 22:30:22 | INFO     | ml.feature_extractor.engineer | fit_transform:45 | FeatureEngineer fitted. Features: ['files_modified_per_sec', 'files_created', 'files_deleted', 'rename_operations', 'read_operations', 'write_operations', 'entropy', 'cpu_usage', 'memory_usage', 'disk_io', 'extension_changes', 'directories_accessed', 'encryption_ratio', 'write_read_ratio', 'file_churn_rate', 'entropy_encryption_product', 'cpu_disk_product', 'modification_density', 'extension_change_rate', 'high_entropy_flag', 'high_encryption_flag']
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:89 | Engineered features: 21
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:92 | [4/9] Splitting train/test sets...
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:100 | Train: 4000 samples | Test: 1000 samples
+2026-07-18 22:30:22 | INFO     | ml.training.pipeline | run:105 | [5/9] Training Random Forest...
+2026-07-18 22:30:22 | INFO     | ml.training.random_forest_trainer | train:71 | Training Random Forest | X_train shape: (4000, 21)
+2026-07-18 22:30:22 | INFO     | ml.training.random_forest_trainer | build_model:51 | RandomForest model built with params: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'class_weight': 'balanced', 'random_state': 42, 'n_jobs': -1}
+2026-07-18 22:30:24 | INFO     | ml.training.random_forest_trainer | train:76 | Random Forest training complete. OOB score: 1.0000
+2026-07-18 22:30:24 | INFO     | ml.training.pipeline | run:120 | [6/9] Training XGBoost...
+2026-07-18 22:30:24 | INFO     | ml.training.xgboost_trainer | train:83 | Training XGBoost | X_train shape: (3600, 21)
+2026-07-18 22:30:24 | INFO     | ml.training.xgboost_trainer | build_model:57 | XGBoost model built with params: {'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.1, 'subsample': 0.8, 'colsample_bytree': 0.8, 'eval_metric': 'logloss', 'random_state': 42, 'n_jobs': -1, 'scale_pos_weight': 1.0, 'use_label_encoder': False}
+2026-07-18 22:30:24 | INFO     | ml.training.xgboost_trainer | train:92 | Using validation set with early stopping.
+2026-07-18 22:30:25 | INFO     | ml.training.xgboost_trainer | train:100 | XGBoost training complete.
+2026-07-18 22:30:25 | INFO     | ml.training.pipeline | run:141 | [7/9] Evaluating models...
+2026-07-18 22:30:25 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [RandomForest] on 1000 test samples...
+2026-07-18 22:30:25 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_RandomForest.png
+2026-07-18 22:30:26 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_RandomForest.png
+2026-07-18 22:30:27 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_RandomForest.png
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_RandomForest.png
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: RandomForest
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       500
+  Ransomware       1.00      1.00      1.00       500
+
+    accuracy                           1.00      1000
+   macro avg       1.00      1.00      1.00      1000
+weighted avg       1.00      1.00      1.00      1000
+
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [XGBoost] on 1000 test samples...
+2026-07-18 22:30:28 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_XGBoost.png
+2026-07-18 22:30:29 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_XGBoost.png
+2026-07-18 22:30:30 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_XGBoost.png
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_XGBoost.png
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: XGBoost
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       500
+  Ransomware       1.00      1.00      1.00       500
+
+    accuracy                           1.00      1000
+   macro avg       1.00      1.00      1.00      1000
+weighted avg       1.00      1.00      1.00      1000
+
+2026-07-18 22:30:31 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | run:150 | [8/9] Comparing models...
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | _compare_models:231 | RF composite score: 1.0000
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | _compare_models:232 | XGB composite score: 1.0000
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | _compare_models:233 | Winner: RandomForest (margin: 0.0000)
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | run:155 | Best model: RandomForest
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | run:158 | [9/9] Saving models...
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: random_forest.joblib (12.1 KB)
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: xgboost.joblib (15.2 KB)
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: best_model.joblib (12.1 KB)
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: scaler.joblib (1.2 KB)
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | _save_metadata:198 | Metadata saved: D:\Projects\ransomguard\ml\ml\models\saved\model_metadata.json
+2026-07-18 22:30:31 | INFO     | ml.models.model_registry | save_all:78 | All artifacts saved to: D:\Projects\ransomguard\ml\ml\models\saved
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | run:172 | Pipeline complete in 9.5s
+2026-07-18 22:30:31 | INFO     | ml.training.pipeline | run:173 | ============================================================
+2026-07-18 22:30:31 | INFO     | ml.main | run_training:86 | Training complete.
+2026-07-18 22:54:50 | INFO     | ml.main | run_training:63 | ============================================================
+2026-07-18 22:54:50 | INFO     | ml.main | run_training:64 | RansomGuard ML — Training Mode
+2026-07-18 22:54:50 | INFO     | ml.main | run_training:65 | ============================================================
+2026-07-18 22:54:50 | INFO     | ml.main | run_training:75 | Using default dataset: D:\Projects\ransomguard\ml\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:70 | ============================================================
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:71 | RansomGuard Training Pipeline Starting
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:72 | ============================================================
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:75 | [1/9] Loading dataset...
+2026-07-18 22:54:50 | WARNING  | ml.dataset.loader | load:117 | MLRan dataset not found at: D:\Projects\ransomguard\ml\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:54:50 | INFO     | ml.dataset.loader | load:130 | No explicit datasets found. Scanning dataset directory...
+2026-07-18 22:54:50 | WARNING  | ml.dataset.loader | load:134 | No datasets loaded. Generating synthetic dataset for testing.
+2026-07-18 22:54:50 | WARNING  | ml.dataset.loader | _generate_synthetic_dataset:334 | Generating synthetic dataset — NOT for production use.
+2026-07-18 22:54:50 | INFO     | ml.dataset.loader | _generate_synthetic_dataset:377 | Synthetic dataset created: (5000, 14)
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:78 | Dataset stats: 5000 samples
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:81 | [2/9] Splitting features and labels...
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:83 | Feature matrix: (5000, 13) | Labels: (5000,)
+2026-07-18 22:54:50 | INFO     | ml.training.pipeline | run:86 | [3/9] Applying feature engineering and normalization...
+2026-07-18 22:54:51 | INFO     | ml.feature_extractor.engineer | fit_transform:45 | FeatureEngineer fitted. Features: ['files_modified_per_sec', 'files_created', 'files_deleted', 'rename_operations', 'read_operations', 'write_operations', 'entropy', 'cpu_usage', 'memory_usage', 'disk_io', 'extension_changes', 'directories_accessed', 'encryption_ratio', 'write_read_ratio', 'file_churn_rate', 'entropy_encryption_product', 'cpu_disk_product', 'modification_density', 'extension_change_rate', 'high_entropy_flag', 'high_encryption_flag']
+2026-07-18 22:54:51 | INFO     | ml.training.pipeline | run:89 | Engineered features: 21
+2026-07-18 22:54:51 | INFO     | ml.training.pipeline | run:92 | [4/9] Splitting train/test sets...
+2026-07-18 22:54:51 | INFO     | ml.training.pipeline | run:100 | Train: 4000 samples | Test: 1000 samples
+2026-07-18 22:54:51 | INFO     | ml.training.pipeline | run:105 | [5/9] Training Random Forest...
+2026-07-18 22:54:51 | INFO     | ml.training.random_forest_trainer | train:71 | Training Random Forest | X_train shape: (4000, 21)
+2026-07-18 22:54:51 | INFO     | ml.training.random_forest_trainer | build_model:51 | RandomForest model built with params: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'class_weight': 'balanced', 'random_state': 42, 'n_jobs': -1}
+2026-07-18 22:54:52 | INFO     | ml.training.random_forest_trainer | train:76 | Random Forest training complete. OOB score: 1.0000
+2026-07-18 22:54:52 | INFO     | ml.training.pipeline | run:120 | [6/9] Training XGBoost...
+2026-07-18 22:54:52 | INFO     | ml.training.xgboost_trainer | train:83 | Training XGBoost | X_train shape: (3600, 21)
+2026-07-18 22:54:52 | INFO     | ml.training.xgboost_trainer | build_model:57 | XGBoost model built with params: {'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.1, 'subsample': 0.8, 'colsample_bytree': 0.8, 'eval_metric': 'logloss', 'random_state': 42, 'n_jobs': -1, 'scale_pos_weight': 1.0, 'use_label_encoder': False}
+2026-07-18 22:54:52 | INFO     | ml.training.xgboost_trainer | train:92 | Using validation set with early stopping.
+2026-07-18 22:54:52 | INFO     | ml.training.xgboost_trainer | train:100 | XGBoost training complete.
+2026-07-18 22:54:52 | INFO     | ml.training.pipeline | run:141 | [7/9] Evaluating models...
+2026-07-18 22:54:52 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [RandomForest] on 1000 test samples...
+2026-07-18 22:54:53 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_RandomForest.png
+2026-07-18 22:54:53 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_RandomForest.png
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_RandomForest.png
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_RandomForest.png
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: RandomForest
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       500
+  Ransomware       1.00      1.00      1.00       500
+
+    accuracy                           1.00      1000
+   macro avg       1.00      1.00      1.00      1000
+weighted avg       1.00      1.00      1.00      1000
+
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [XGBoost] on 1000 test samples...
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_XGBoost.png
+2026-07-18 22:54:54 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_XGBoost.png
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_XGBoost.png
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_XGBoost.png
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: XGBoost
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       500
+  Ransomware       1.00      1.00      1.00       500
+
+    accuracy                           1.00      1000
+   macro avg       1.00      1.00      1.00      1000
+weighted avg       1.00      1.00      1.00      1000
+
+2026-07-18 22:54:55 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | run:150 | [8/9] Comparing models...
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | _compare_models:231 | RF composite score: 1.0000
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | _compare_models:232 | XGB composite score: 1.0000
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | _compare_models:233 | Winner: RandomForest (margin: 0.0000)
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | run:155 | Best model: RandomForest
+2026-07-18 22:54:55 | INFO     | ml.training.pipeline | run:158 | [9/9] Saving models...
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: random_forest.joblib (12.1 KB)
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: xgboost.joblib (15.2 KB)
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: best_model.joblib (12.1 KB)
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: scaler.joblib (1.2 KB)
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | _save_metadata:198 | Metadata saved: D:\Projects\ransomguard\ml\ml\models\saved\model_metadata.json
+2026-07-18 22:54:56 | INFO     | ml.models.model_registry | save_all:78 | All artifacts saved to: D:\Projects\ransomguard\ml\ml\models\saved
+2026-07-18 22:54:56 | INFO     | ml.training.pipeline | run:172 | Pipeline complete in 5.2s
+2026-07-18 22:54:56 | INFO     | ml.training.pipeline | run:173 | ============================================================
+2026-07-18 22:54:56 | INFO     | ml.main | run_training:86 | Training complete.
+2026-07-18 22:56:38 | INFO     | ml.main | run_training:63 | ============================================================
+2026-07-18 22:56:38 | INFO     | ml.main | run_training:64 | RansomGuard ML — Training Mode
+2026-07-18 22:56:38 | INFO     | ml.main | run_training:65 | ============================================================
+2026-07-18 22:56:38 | INFO     | ml.main | run_training:75 | Using default dataset: D:\Projects\ransomguard\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:56:38 | INFO     | ml.training.pipeline | run:70 | ============================================================
+2026-07-18 22:56:38 | INFO     | ml.training.pipeline | run:71 | RansomGuard Training Pipeline Starting
+2026-07-18 22:56:38 | INFO     | ml.training.pipeline | run:72 | ============================================================
+2026-07-18 22:56:38 | INFO     | ml.training.pipeline | run:75 | [1/9] Loading dataset...
+2026-07-18 22:56:38 | INFO     | ml.dataset.loader | _load_single_file:203 | Loading dataset [MLRan]: D:\Projects\ransomguard\ml\dataset\data\mlran_dataset.csv
+2026-07-18 22:56:38 | INFO     | ml.dataset.loader | _load_single_file:205 |   Raw shape: (4000, 14)
+2026-07-18 22:56:38 | DEBUG    | ml.dataset.loader | _normalize_columns:222 |   Renamed columns: {'files_modified_per_sec': 'files_modified_per_sec', 'files_created': 'files_created', 'files_deleted': 'files_deleted', 'rename_operations': 'rename_operations', 'read_operations': 'read_operations', 'write_operations': 'write_operations', 'entropy': 'entropy', 'cpu_usage': 'cpu_usage', 'memory_usage': 'memory_usage', 'disk_io': 'disk_io', 'extension_changes': 'extension_changes', 'directories_accessed': 'directories_accessed', 'encryption_ratio': 'encryption_ratio', 'label': 'label'}
+2026-07-18 22:56:39 | INFO     | ml.dataset.loader | _load_single_file:208 |   Normalized shape: (4000, 14)
+2026-07-18 22:56:39 | INFO     | ml.dataset.loader | _clean_dataframe:269 |   After dedup: 4000 rows (removed 0)
+2026-07-18 22:56:39 | INFO     | ml.dataset.loader | _clean_dataframe:298 |   Final clean shape: (4000, 14)
+2026-07-18 22:56:39 | INFO     | ml.dataset.loader | load:139 | Final dataset: 4000 rows | Ransomware: 2000 | Benign: 2000
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:78 | Dataset stats: 4000 samples
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:81 | [2/9] Splitting features and labels...
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:83 | Feature matrix: (4000, 13) | Labels: (4000,)
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:86 | [3/9] Applying feature engineering and normalization...
+2026-07-18 22:56:39 | INFO     | ml.feature_extractor.engineer | fit_transform:45 | FeatureEngineer fitted. Features: ['files_modified_per_sec', 'files_created', 'files_deleted', 'rename_operations', 'read_operations', 'write_operations', 'entropy', 'cpu_usage', 'memory_usage', 'disk_io', 'extension_changes', 'directories_accessed', 'encryption_ratio', 'write_read_ratio', 'file_churn_rate', 'entropy_encryption_product', 'cpu_disk_product', 'modification_density', 'extension_change_rate', 'high_entropy_flag', 'high_encryption_flag']
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:89 | Engineered features: 21
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:92 | [4/9] Splitting train/test sets...
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:100 | Train: 3200 samples | Test: 800 samples
+2026-07-18 22:56:39 | INFO     | ml.training.pipeline | run:105 | [5/9] Training Random Forest...
+2026-07-18 22:56:39 | INFO     | ml.training.random_forest_trainer | train:71 | Training Random Forest | X_train shape: (3200, 21)
+2026-07-18 22:56:39 | INFO     | ml.training.random_forest_trainer | build_model:51 | RandomForest model built with params: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'class_weight': 'balanced', 'random_state': 42, 'n_jobs': -1}
+2026-07-18 22:56:41 | INFO     | ml.training.random_forest_trainer | train:76 | Random Forest training complete. OOB score: 1.0000
+2026-07-18 22:56:41 | INFO     | ml.training.pipeline | run:120 | [6/9] Training XGBoost...
+2026-07-18 22:56:41 | INFO     | ml.training.xgboost_trainer | train:83 | Training XGBoost | X_train shape: (2880, 21)
+2026-07-18 22:56:41 | INFO     | ml.training.xgboost_trainer | build_model:57 | XGBoost model built with params: {'n_estimators': 200, 'max_depth': 6, 'learning_rate': 0.1, 'subsample': 0.8, 'colsample_bytree': 0.8, 'eval_metric': 'logloss', 'random_state': 42, 'n_jobs': -1, 'scale_pos_weight': 1.0, 'use_label_encoder': False}
+2026-07-18 22:56:41 | INFO     | ml.training.xgboost_trainer | train:92 | Using validation set with early stopping.
+2026-07-18 22:56:41 | INFO     | ml.training.xgboost_trainer | train:100 | XGBoost training complete.
+2026-07-18 22:56:41 | INFO     | ml.training.pipeline | run:141 | [7/9] Evaluating models...
+2026-07-18 22:56:41 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [RandomForest] on 800 test samples...
+2026-07-18 22:56:42 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_RandomForest.png
+2026-07-18 22:56:42 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_RandomForest.png
+2026-07-18 22:56:43 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_RandomForest.png
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_RandomForest.png
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: RandomForest
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       400
+  Ransomware       1.00      1.00      1.00       400
+
+    accuracy                           1.00       800
+   macro avg       1.00      1.00      1.00       800
+weighted avg       1.00      1.00      1.00       800
+
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | evaluate:76 | Evaluating [XGBoost] on 800 test samples...
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _plot_confusion_matrix:213 | Confusion matrix saved: D:\Projects\ransomguard\ml\plots\confusion_matrix_XGBoost.png
+2026-07-18 22:56:44 | INFO     | ml.evaluation.evaluator | _plot_roc_curve:239 | ROC curve saved: D:\Projects\ransomguard\ml\plots\roc_curve_XGBoost.png
+2026-07-18 22:56:45 | INFO     | ml.evaluation.evaluator | _plot_feature_importance:266 | Feature importance plot saved: D:\Projects\ransomguard\ml\plots\feature_importance_XGBoost.png
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _plot_shap_summary:292 | SHAP summary plot saved: D:\Projects\ransomguard\ml\plots\shap_summary_XGBoost.png
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:311 | 
+==================================================
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:312 |   Evaluation Results: XGBoost
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:313 | ==================================================
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:314 |   Accuracy  : 1.0000
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:315 |   Precision : 1.0000
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:316 |   Recall    : 1.0000
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:317 |   F1 Score  : 1.0000
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:318 |   ROC-AUC   : 1.0000
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:319 | 
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00       400
+  Ransomware       1.00      1.00      1.00       400
+
+    accuracy                           1.00       800
+   macro avg       1.00      1.00      1.00       800
+weighted avg       1.00      1.00      1.00       800
+
+2026-07-18 22:56:46 | INFO     | ml.evaluation.evaluator | _log_metrics:320 | ==================================================
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | run:150 | [8/9] Comparing models...
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | _compare_models:231 | RF composite score: 1.0000
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | _compare_models:232 | XGB composite score: 1.0000
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | _compare_models:233 | Winner: RandomForest (margin: 0.0000)
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | run:155 | Best model: RandomForest
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | run:158 | [9/9] Saving models...
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: random_forest.joblib (10.9 KB)
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: xgboost.joblib (15.1 KB)
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: best_model.joblib (10.9 KB)
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | _save_artifact:143 | Saved: scaler.joblib (1.2 KB)
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | _save_metadata:198 | Metadata saved: D:\Projects\ransomguard\ml\models\saved\model_metadata.json
+2026-07-18 22:56:46 | INFO     | ml.models.model_registry | save_all:78 | All artifacts saved to: D:\Projects\ransomguard\ml\models\saved
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | run:172 | Pipeline complete in 7.4s
+2026-07-18 22:56:46 | INFO     | ml.training.pipeline | run:173 | ============================================================
+2026-07-18 22:56:46 | INFO     | ml.main | run_training:86 | Training complete.
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:66 | Loading RansomwarePredictor...
+2026-07-18 22:57:50 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded best model from: D:\Projects\ransomguard\ml\models\saved\best_model.joblib
+2026-07-18 22:57:50 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded scaler from: D:\Projects\ransomguard\ml\models\saved\scaler.joblib
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:80 | Loaded model: RandomForest
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:81 | Features: 21 features
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:89 | RansomwarePredictor ready.
+2026-07-18 22:57:50 | DEBUG    | ml.predictor.predictor | _get_shap_explanation:332 | SHAP explanation skipped: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-07-18 22:57:50 | DEBUG    | ml.predictor.predictor | _log_prediction:371 | [LOW] BENIGN | prob=0.0000 | risk=0.0847
+2026-07-18 22:57:50 | DEBUG    | ml.predictor.predictor | _get_shap_explanation:332 | SHAP explanation skipped: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-07-18 22:57:50 | WARNING  | ml.predictor.predictor | _log_prediction:367 | [CRITICAL] RANSOMWARE | prob=1.0000 | risk=0.8954
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:66 | Loading RansomwarePredictor...
+2026-07-18 22:57:50 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded best model from: D:\Projects\ransomguard\ml\models\saved\best_model.joblib
+2026-07-18 22:57:50 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded scaler from: D:\Projects\ransomguard\ml\models\saved\scaler.joblib
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:80 | Loaded model: RandomForest
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:81 | Features: 21 features
+2026-07-18 22:57:50 | INFO     | ml.predictor.predictor | load:89 | RansomwarePredictor ready.
+2026-07-18 22:57:50 | DEBUG    | ml.predictor.predictor | _get_shap_explanation:332 | SHAP explanation skipped: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-07-18 22:57:50 | DEBUG    | ml.predictor.predictor | _log_prediction:371 | [MEDIUM] BENIGN | prob=0.3650 | risk=0.4587
+2026-07-18 22:58:40 | INFO     | ml.predictor.predictor | load:66 | Loading RansomwarePredictor...
+2026-07-18 22:58:40 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded best model from: D:\Projects\ransomguard\ml\models\saved\best_model.joblib
+2026-07-18 22:58:40 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded scaler from: D:\Projects\ransomguard\ml\models\saved\scaler.joblib
+2026-07-18 22:58:40 | INFO     | ml.predictor.predictor | load:80 | Loaded model: RandomForest
+2026-07-18 22:58:40 | INFO     | ml.predictor.predictor | load:81 | Features: 21 features
+2026-07-18 22:58:40 | INFO     | ml.predictor.predictor | load:89 | RansomwarePredictor ready.

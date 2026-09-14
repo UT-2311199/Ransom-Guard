@@ -1,0 +1,6 @@
+2026-07-19 12:30:07 | INFO     | ml.predictor.predictor | load:66 | Loading RansomwarePredictor...
+2026-07-19 12:30:07 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded best model from: D:\Projects\ransomguard\ml\models\saved\best_model.joblib
+2026-07-19 12:30:07 | INFO     | ml.models.model_registry | _load_artifact:151 | Loaded scaler from: D:\Projects\ransomguard\ml\models\saved\scaler.joblib
+2026-07-19 12:30:07 | INFO     | ml.predictor.predictor | load:80 | Loaded model: RandomForest
+2026-07-19 12:30:07 | INFO     | ml.predictor.predictor | load:81 | Features: 21 features
+2026-07-19 12:30:07 | INFO     | ml.predictor.predictor | load:89 | RansomwarePredictor ready.

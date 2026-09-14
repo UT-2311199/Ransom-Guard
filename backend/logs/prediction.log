@@ -1,0 +1,2 @@
+2026-07-18 22:58:40 | INFO     | ml_bridge | get_ml_predictor:48 | ML bridge initialized — model: RandomForest, features: 21
+2026-07-19 12:30:07 | INFO     | ml_bridge | get_ml_predictor:48 | ML bridge initialized — model: RandomForest, features: 21

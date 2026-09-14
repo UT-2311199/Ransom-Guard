@@ -1,0 +1,30 @@
+2026-07-18 22:15:01 | INFO     | main | lifespan:39 | === RansomGuard Backend Starting ===
+2026-07-18 22:15:02 | INFO     | main | lifespan:43 | MongoDB connection established
+2026-07-18 22:15:02 | INFO     | main | lifespan:48 | Required directories created
+2026-07-18 22:15:02 | INFO     | main | lifespan:54 | File system monitor started
+2026-07-18 22:15:02 | INFO     | main | lifespan:62 | Process monitor started
+2026-07-18 22:15:02 | INFO     | main | lifespan:70 | === RansomGuard Backend Ready ===
+2026-07-18 22:30:30 | INFO     | main | lifespan:39 | === RansomGuard Backend Starting ===
+2026-07-18 22:30:31 | INFO     | main | lifespan:43 | MongoDB connection established
+2026-07-18 22:30:31 | INFO     | main | lifespan:48 | Required directories created
+2026-07-18 22:30:31 | INFO     | main | lifespan:54 | File system monitor started
+2026-07-18 22:30:31 | INFO     | main | lifespan:62 | Process monitor started
+2026-07-18 22:30:31 | INFO     | main | lifespan:70 | === RansomGuard Backend Ready ===
+2026-07-18 22:51:53 | INFO     | main | lifespan:40 | === RansomGuard Backend Starting ===
+2026-07-18 22:51:53 | INFO     | main | lifespan:44 | MongoDB connection established
+2026-07-18 22:51:53 | INFO     | main | lifespan:49 | Required directories created
+2026-07-18 22:51:53 | INFO     | main | lifespan:55 | File system monitor started
+2026-07-18 22:51:53 | INFO     | main | lifespan:63 | Process monitor started
+2026-07-18 22:51:53 | INFO     | main | lifespan:71 | === RansomGuard Backend Ready ===
+2026-07-18 22:58:11 | INFO     | main | lifespan:40 | === RansomGuard Backend Starting ===
+2026-07-18 22:58:11 | INFO     | main | lifespan:44 | MongoDB connection established
+2026-07-18 22:58:11 | INFO     | main | lifespan:49 | Required directories created
+2026-07-18 22:58:11 | INFO     | main | lifespan:55 | File system monitor started
+2026-07-18 22:58:11 | INFO     | main | lifespan:63 | Process monitor started
+2026-07-18 22:58:11 | INFO     | main | lifespan:71 | === RansomGuard Backend Ready ===
+2026-07-19 12:25:44 | INFO     | main | lifespan:40 | === RansomGuard Backend Starting ===
+2026-07-19 12:25:45 | INFO     | main | lifespan:44 | MongoDB connection established
+2026-07-19 12:25:45 | INFO     | main | lifespan:49 | Required directories created
+2026-07-19 12:25:45 | INFO     | main | lifespan:55 | File system monitor started
+2026-07-19 12:25:45 | INFO     | main | lifespan:63 | Process monitor started
+2026-07-19 12:25:45 | INFO     | main | lifespan:71 | === RansomGuard Backend Ready ===

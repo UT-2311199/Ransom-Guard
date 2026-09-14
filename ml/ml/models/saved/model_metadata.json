@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "trained_at": "2026-07-18T17:24:56.150001Z",
+  "best_model_name": "RandomForest",
+  "feature_names": [
+    "files_modified_per_sec",
+    "files_created",
+    "files_deleted",
+    "rename_operations",
+    "read_operations",
+    "write_operations",
+    "entropy",
+    "cpu_usage",
+    "memory_usage",
+    "disk_io",
+    "extension_changes",
+    "directories_accessed",
+    "encryption_ratio",
+    "write_read_ratio",
+    "file_churn_rate",
+    "entropy_encryption_product",
+    "cpu_disk_product",
+    "modification_density",
+    "extension_change_rate",
+    "high_entropy_flag",
+    "high_encryption_flag"
+  ],
+  "feature_count": 21,
+  "rf_metrics": {
+    "model_name": "RandomForest",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "confusion_matrix": [
+      [
+        500,
+        0
+      ],
+      [
+        0,
+        500
+      ]
+    ],
+    "roc_auc": 1.0
+  },
+  "xgb_metrics": {
+    "model_name": "XGBoost",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "confusion_matrix": [
+      [
+        500,
+        0
+      ],
+      [
+        0,
+        500
+      ]
+    ],
+    "roc_auc": 1.0
+  },
+  "dataset": {
+    "total_samples": 5000,
+    "ransomware_samples": 2500,
+    "benign_samples": 2500,
+    "class_balance": 0.5
+  },
+  "model_files": {
+    "best_model": "best_model.joblib",
+    "random_forest": "random_forest.joblib",
+    "xgboost": "xgboost.joblib",
+    "scaler": "scaler.joblib"
+  }
+}
