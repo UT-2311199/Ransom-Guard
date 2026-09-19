@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 
 from api.routes import (
     analytics,
+    auth,
     monitor,
     ml_status,
     prediction,
@@ -42,6 +43,9 @@ async def lifespan(app: FastAPI):
     # Connect to MongoDB
     await connect_to_mongo()
     logger.info("MongoDB connection established")
+
+    # Seed initial default users if not present
+    await auth.ensure_seed_users()
 
     # Create required directories
     os.makedirs("logs", exist_ok=True)
@@ -151,6 +155,7 @@ async def health_check():
 
 
 # Register all routers
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
 app.include_router(system.router, prefix="/api/v1", tags=["System"])
 app.include_router(monitor.router, prefix="/api/v1", tags=["Monitor"])
 app.include_router(prediction.router, prefix="/api/v1", tags=["Prediction"])

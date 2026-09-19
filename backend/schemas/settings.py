@@ -18,12 +18,18 @@ class MonitorSettings(BaseModel):
 
 class AlertSettings(BaseModel):
     enable_alerts: bool = True
+    email_alerts: bool = True
+    alert_email: Optional[str] = "admin@company.com"
     threat_threshold: float = Field(0.7, ge=0.0, le=1.0, description="Minimum confidence for alerting")
     auto_quarantine: bool = Field(False, description="Automatically quarantine threats")
     auto_terminate: bool = Field(False, description="Automatically terminate suspicious processes")
     alert_on_critical: bool = True
     alert_on_high: bool = True
     alert_on_medium: bool = False
+
+
+class TestEmailRequest(BaseModel):
+    email: str
 
 
 class MLSettings(BaseModel):

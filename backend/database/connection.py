@@ -76,6 +76,9 @@ async def create_indexes():
     # settings indexes
     await database["settings"].create_index("key", unique=True)
 
+    # users indexes
+    await database["users"].create_index("email", unique=True)
+
     logger.info("MongoDB indexes created successfully")
 
 

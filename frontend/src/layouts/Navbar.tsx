@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bell, Search, Shield, AlertTriangle, CheckCircle,
-  Info, X, ChevronRight, Wifi, WifiOff, RefreshCw,
+  Info, X, ChevronRight, Wifi, WifiOff, RefreshCw, LogOut,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 import { ThreatBadge } from '../components/ThreatBadge';
 import { cn, timeAgo } from '../utils/helpers';
 import toast from 'react-hot-toast';
@@ -17,6 +18,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ sidebarWidth, pageTitle, pageSubtitle }) => {
   const { alerts, isMonitoring, toggleMonitoring, threatLevel, systemMetrics } = useApp();
+  const { user, logout } = useAuth();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -231,22 +233,36 @@ export const Navbar: React.FC<NavbarProps> = ({ sidebarWidth, pageTitle, pageSub
             </AnimatePresence>
           </div>
 
-          {/* System health dot */}
-          <div className="flex items-center gap-2 pl-2 border-l border-slate-700/50">
-            <div className="text-right">
-              <div className="text-xs font-medium text-slate-300">
-                {systemMetrics.cpu.toFixed(1)}% CPU
-              </div>
-              <div className="text-[10px] text-slate-500">
-                {systemMetrics.memory.toFixed(1)}% MEM
+          {/* User Profile & Logout */}
+          {user && (
+            <div className="flex items-center gap-2 pl-2 border-l border-slate-700/50">
+              <div className="flex items-center gap-2.5 bg-slate-800/70 border border-slate-700/50 py-1 px-2.5 rounded-xl">
+                <img
+                  src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.email}`}
+                  alt={user.name}
+                  className="w-7 h-7 rounded-lg bg-blue-600/20 border border-blue-500/30 object-cover"
+                />
+                <div className="text-left hidden sm:block">
+                  <div className="text-xs font-semibold text-slate-200 leading-tight truncate max-w-[120px]">
+                    {user.name}
+                  </div>
+                  <div className="text-[10px] text-blue-400 font-medium leading-none">
+                    {user.role}
+                  </div>
+                </div>
+                <button
+                  onClick={logout}
+                  title="Logout Session"
+                  className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors ml-1"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
-              <Shield className="w-4 h-4 text-blue-400" />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </header>
   );
 };
+

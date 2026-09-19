@@ -147,6 +147,31 @@ export const reportsApi = {
     api.get(`/api/v1/reports/${report_id}/download`, { responseType: 'blob' }),
 };
 
+// ─── Authentication ─────────────────────────────────────────────────────────
+export const authApi = {
+  /** POST /api/v1/auth/login */
+  login: (data: { email: string; password: string; remember_me?: boolean }) =>
+    api.post('/api/v1/auth/login', data),
+
+  /** POST /api/v1/auth/register */
+  register: (data: { email: string; password: string; name: string; role?: string }) =>
+    api.post('/api/v1/auth/register', data),
+
+  /** GET /api/v1/auth/me */
+  getMe: () => api.get('/api/v1/auth/me'),
+
+  /** POST /api/v1/auth/google */
+  googleLogin: (data?: { email?: string; name?: string; credential?: string; picture?: string }) =>
+    api.post('/api/v1/auth/google', data || {}),
+
+  /** POST /api/v1/auth/forgot-password */
+  forgotPassword: (data: { email: string }) =>
+    api.post('/api/v1/auth/forgot-password', data),
+
+  /** POST /api/v1/auth/logout */
+  logout: () => api.post('/api/v1/auth/logout'),
+};
+
 // ─── Settings ────────────────────────────────────────────────────────────────
 export const settingsApi = {
   /** GET /api/v1/settings */
@@ -156,8 +181,12 @@ export const settingsApi = {
   updateSettings: (settings: Record<string, unknown>) =>
     api.post('/api/v1/settings', settings),
 
+  /** POST /api/v1/settings/test-email */
+  testEmail: (email: string) => api.post('/api/v1/settings/test-email', { email }),
+
   /** DELETE /api/v1/settings/reset */
   resetSettings: () => api.delete('/api/v1/settings/reset'),
 };
 
 export default api;
+

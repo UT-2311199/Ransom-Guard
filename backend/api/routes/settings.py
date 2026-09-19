@@ -22,6 +22,8 @@ DEFAULT_SETTINGS = {
     },
     "alerts": {
         "enable_alerts": True,
+        "email_alerts": True,
+        "alert_email": "admin@company.com",
         "threat_threshold": 0.7,
         "auto_quarantine": False,
         "auto_terminate": False,
@@ -166,3 +168,23 @@ async def reset_settings():
     except Exception as e:
         logger.error(f"DELETE /settings/reset error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/settings/test-email", summary="Send a test alert email")
+async def send_test_email(req: dict):
+    """
+    Dispatch a test security alert email to verify notification settings.
+    """
+    email_to = req.get("email") or "admin@company.com"
+    try:
+        from utils.email_service import send_test_security_email
+        res = send_test_security_email(email_to)
+        return {
+            "success": res.get("success", True),
+            "mode": res.get("mode", "simulated"),
+            "message": res.get("message", f"Test email dispatched to {email_to}"),
+            "timestamp": datetime.utcnow().isoformat(),
+        }
+    except Exception as e:
+        logger.error(f"POST /settings/test-email error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to dispatch test email: {e}")
